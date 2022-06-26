@@ -12,7 +12,6 @@ public class MobileController : MonoBehaviour
     [SerializeField] private float jumpSpeed = 30f;    // Player hareket h�z�
     [SerializeField] private bool isGround;    // // Player default kayd�rma mesafesi
     //[SerializeField] private bool isMoving; // Hareket ediyor mu
-    [SerializeField] private GameObject defaultPlane;
 
 
     void Start()
@@ -20,15 +19,13 @@ public class MobileController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         isGround = true;
         tap = false;
-        defaultPlane.SetActive(false);
     }
     private void Update()
     {
         MoveInput();    // Player hareket kontrol�
     }
     private void FixedUpdate()
-    {
-        //transform.Translate(0, 0, 10f * Time.fixedDeltaTime);     
+    {             
         
     }
 
