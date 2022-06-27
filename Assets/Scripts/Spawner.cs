@@ -18,11 +18,12 @@ public class Spawner : MonoBehaviour
         while (true)    // Sonsuz döngü 
         {
             poolValue = Random.Range(0, 7);
+            float circleX = Random.Range(-1f,3f);
             GameObject newObj = objectPool.GetPooledObject(poolValue);    // "ObjectPool" scriptinden yeni nesne çeker   
-            newObj.transform.position = new Vector3(0f, 0f, 100f);   // Gelen yeni nesnenin pozisyonu ayarlar
+            newObj.transform.position = new Vector3(circleX, 0f, 100f);   // Gelen yeni nesnenin pozisyonu ayarlar
             if (poolValue == 6)
             {
-                newObj.transform.position = new Vector3(1f, 1.6f, 100f);
+                newObj.transform.position = new Vector3(circleX, 1.6f, 100f);
             }
             else
             {

@@ -186,7 +186,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-140370
+  m_Name: pb_Mesh-1326
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5298,8 +5298,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd933595a6994b543bb0a38f3a0c93b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tap: 0
+  right: 0
+  left: 0
+  up: 0
+  distance: 10
   jumpSpeed: 7
+  speed: 4
+  defaultSwipe: 2
   isGround: 1
 --- !u!54 &757772567
 Rigidbody:
@@ -5315,7 +5320,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 122
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!135 &757772568
 SphereCollider:
@@ -6020,7 +6025,7 @@ PrefabInstance:
       objectReference: {fileID: 436459529}
     - target: {fileID: 5253087077198726031, guid: 9ee613e31a71cd6408ebbd7e24f48512, type: 3}
       propertyPath: m_VersionIndex
-      value: 3694
+      value: 3703
       objectReference: {fileID: 0}
     - target: {fileID: 5253087077198726032, guid: 9ee613e31a71cd6408ebbd7e24f48512, type: 3}
       propertyPath: m_RootOrder
