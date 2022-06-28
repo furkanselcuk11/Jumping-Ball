@@ -93,9 +93,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8035010189731435259}
   - component: {fileID: 3387623811437612198}
+  - component: {fileID: 6200759653419342077}
   m_Layer: 0
   m_Name: RoadBlock_Yellow_Up
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,6 +130,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 40
+--- !u!65 &6200759653419342077
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8035010189731435260}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.177583, y: 1.5381252, z: 1.4143895}
+  m_Center: {x: -0.0048029423, y: 0.77445656, z: -0.004163444}
 --- !u!1 &8035010190542340564
 GameObject:
   m_ObjectHideFlags: 0

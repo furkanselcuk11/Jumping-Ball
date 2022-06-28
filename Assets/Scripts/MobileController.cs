@@ -43,6 +43,8 @@ public class MobileController : MonoBehaviour
     {
         if (Input.touchCount > 0)
         {
+            GameManager.gamemanagerInstance.gameStart = true;
+            GameObject.Find("Spawner").gameObject.GetComponent<Spawner>().enabled = true;
             _touch = Input.GetTouch(0);
             if (_touch.deltaPosition.magnitude > distance)
             {
@@ -107,6 +109,7 @@ public class MobileController : MonoBehaviour
         {
             rb.velocity = Vector3.zero;
             rb.AddForce(new Vector3(0, jumpSpeed, 0), ForceMode.Impulse);
+            // Ses ekle
             isGround = false;
         }
         if(!tap & isGround)
@@ -121,6 +124,16 @@ public class MobileController : MonoBehaviour
         {
             isGround = true;
             up = false;
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Diamond"))
+        {
+            Debug.Log("Elmas");
+            GameManager.gamemanagerInstance.DiamondAdd();
+            // Efekt ekle
+            // Ses ekle
         }
     }
 }

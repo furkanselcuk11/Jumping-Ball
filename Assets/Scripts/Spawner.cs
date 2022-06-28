@@ -23,18 +23,18 @@ public class Spawner : MonoBehaviour
             poolValue = Random.Range(1, 13);
             float blockX = Random.Range(-2f, 2f);
             GameObject newObj = objectPool.GetPooledObject(poolValue);
-            if(poolValue==1 || poolValue==2 || poolValue==5 || poolValue == 6)
+            if (poolValue == 1 || poolValue == 2 || poolValue == 5 || poolValue == 6)
             {
                 newObj.transform.position = new Vector3(blockX, 0f, 100f);
             }
-            else if(poolValue==11 || poolValue == 12)
+            else if (poolValue == 11 || poolValue == 12)
             {
                 newObj.transform.position = new Vector3(0f, 1.5f, 100f);
             }
             else
             {
                 newObj.transform.position = new Vector3(0f, 0f, 100f);
-            }            
+            }
             yield return new WaitForSeconds(spawnInterval); // Fonk çalışma süresi
         }
     }

@@ -93,9 +93,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4013205121483983421}
   - component: {fileID: 8327443158585985827}
+  - component: {fileID: 4684236674145310226}
   m_Layer: 0
   m_Name: Barrier_Red_1
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,3 +130,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 40
+--- !u!65 &4684236674145310226
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4013205121483983410}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0052347, y: 1.3985252, z: 0.9432591}
+  m_Center: {x: 0.032714844, y: 0.69295776, z: -0.017176926}

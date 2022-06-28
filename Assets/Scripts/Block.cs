@@ -14,4 +14,13 @@ public class Block : MonoBehaviour
     {
         transform.Translate(-transform.forward * (Time.deltaTime * speed));
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("GameOver");
+            // Ses ekle
+            GameManager.gamemanagerInstance.RestartGame();
+        }
+    }
 }

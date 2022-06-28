@@ -6,6 +6,8 @@ TagManager:
   tags:
   - isGround
   - Circle
+  - Block
+  - Diamond
   layers:
   - Default
   - TransparentFX

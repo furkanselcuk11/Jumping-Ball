@@ -28,7 +28,7 @@ public class ObjectPool : MonoBehaviour
                 // for döngüsü ile"poolSize" Oluþturulacak nesne sayýsý kadar yeni nesne oluþturur
                 GameObject newObj = Instantiate(pools[j].objectPrefab);  // Yeni oluþturulan nesneleri "newObj" ismi ile oluþturur( Hangi Obje (pool) seçilmis ise )
                 newObj.SetActive(false);    // Baþlangýçta tüm nesnenin aktifliði false yapar
-
+                newObj.transform.parent = GameObject.Find("BlocksAndCircles").gameObject.transform;
                 pools[j].pooledObjects.Enqueue(newObj);  // Oluþturulan yeni nesneler sýraya eklenir "poolSize" deðeri kadar nesne eklenir
             }
         }
