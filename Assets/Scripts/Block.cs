@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
+    [SerializeField] private float speed = 20f;
     void Start()
     {
         
@@ -11,6 +12,6 @@ public class Block : MonoBehaviour
     
     void Update()
     {
-        transform.Translate(-transform.forward * (Time.deltaTime * 20));
+        transform.Translate(-transform.forward * (Time.deltaTime * speed));
     }
 }
