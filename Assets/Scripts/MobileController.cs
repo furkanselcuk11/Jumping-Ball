@@ -12,6 +12,7 @@ public class MobileController : MonoBehaviour
     public bool right;  // Sola Dokunma 
     public bool left;  // Sağa Dokunma 
     public bool up;  // Yukarı Dokunma 
+    public bool tap;  // Yukarı Dokunma 
     public float distance = 50;
 
     [Space]
@@ -26,6 +27,7 @@ public class MobileController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        tap = false;
         isGround = true;
     }
     private void Update()
@@ -55,6 +57,7 @@ public class MobileController : MonoBehaviour
                         right = false;
                         left = true;
                         up = false;
+                        tap = true;
                     }
                     else
                     {
@@ -62,6 +65,7 @@ public class MobileController : MonoBehaviour
                         right = true;
                         left = false;
                         up = false;
+                        tap = true;
                     }
                 }
                 else
@@ -72,15 +76,18 @@ public class MobileController : MonoBehaviour
                         right = false;
                         left = false;
                         up = true;
+                        tap = true;
                     }
                 }
-                if (_touch.phase == TouchPhase.Ended)
-                {
-                    right = false;
-                    left = false;
-                    up = false;
-                }
+                
             }
+        }
+        if (_touch.phase == TouchPhase.Ended)
+        {
+            right = false;
+            left = false;
+            up = false;
+            tap = false;
         }
     }
     void MoveInput()
@@ -101,6 +108,10 @@ public class MobileController : MonoBehaviour
             rb.velocity = Vector3.zero;
             rb.AddForce(new Vector3(0, jumpSpeed, 0), ForceMode.Impulse);
             isGround = false;
+        }
+        if(!tap & isGround)
+        {
+            rb.velocity = Vector3.zero; // Eğer hareket edilmediyse Player objesi sabit kalsın
         }
         transform.position = new Vector3(moveX, transform.position.y, transform.position.z);
     }
