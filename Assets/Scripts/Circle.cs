@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Circle : MonoBehaviour
 {
-    [SerializeField] private float speed = 20f;
+    public float speed = 20f;
     void Start()
     {
         

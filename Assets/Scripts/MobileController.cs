@@ -9,10 +9,10 @@ public class MobileController : MonoBehaviour
     [Space]
     [Header ("Tap Controller")]
     private Touch _touch;   // Ekrana dokunma algılama
-    public bool right;  // Sola Dokunma 
-    public bool left;  // Sağa Dokunma 
-    public bool up;  // Yukarı Dokunma 
-    public bool tap;  // Yukarı Dokunma 
+    private bool right;  // Sola Dokunma 
+    private bool left;  // Sağa Dokunma 
+    private bool up;  // Yukarı Dokunma 
+    private bool tap;  // Yukarı Dokunma 
     public float distance = 50;
 
     [Space]
@@ -21,14 +21,18 @@ public class MobileController : MonoBehaviour
     [SerializeField] private float speed = 5f;    // Player hareket h�z�
     [SerializeField] private float defaultSwipe = 4f;    // Player default kaydýrma mesafesi
     [SerializeField] private bool isGround;    // // Player default kayd�rma mesafesi
-    //[SerializeField] private bool isMoving; // Hareket ediyor mu
+    [SerializeField] private ParticleSystem GroundContactEffect; 
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         tap = false;
+        right = false;
+        left = false;
+        up = false;
         isGround = true;
+        GroundContactEffect.GetComponent<ParticleSystem>().Pause();
     }
     private void Update()
     {
@@ -42,8 +46,6 @@ public class MobileController : MonoBehaviour
     {
         if (Input.touchCount > 0)
         {
-            //GameManager.gamemanagerInstance.gameStart = true;
-            //GameObject.Find("Spawner").gameObject.GetComponent<Spawner>().enabled = true;
             GameManager.gamemanagerInstance.StartTheGame();
             _touch = Input.GetTouch(0);
             if (_touch.deltaPosition.magnitude > distance)
@@ -122,6 +124,13 @@ public class MobileController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("isGround"))
         {
+            //var NewParticle = Instantiate(GroundContactEffect, new Vector3(transform.position.x,0.05f,0f), Quaternion.identity);
+            //NewParticle.GetComponent<Renderer>().material = gameObject.gameObject.transform.GetChild(0).gameObject.GetComponent<Renderer>().material;
+            if (GameManager.gamemanagerInstance.gameStart)
+            {
+                GroundContactEffect.GetComponent<ParticleSystem>().Play();
+                GroundContactEffect.GetComponent<Renderer>().material = gameObject.gameObject.transform.GetChild(0).gameObject.GetComponent<Renderer>().material;
+            }            
             isGround = true;
             up = false;
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    [SerializeField] private float speed = 20f;
+    public float speed = 20f;
     void Start()
     {
         
@@ -20,7 +20,11 @@ public class Block : MonoBehaviour
         {
             Debug.Log("GameOver");
             AudioController.audioControllerInstance.Play("GameOverSound"); // Ses çalýþýr
-            GameManager.gamemanagerInstance.RestartGame();
+            var diedParticle = Instantiate(GameManager.gamemanagerInstance.diedEffect, other.gameObject.transform.position, Quaternion.identity);
+            diedParticle.GetComponent<Renderer>().material = other.gameObject.transform.GetComponent<Renderer>().material;
+            Destroy(other.gameObject);
+            Destroy(diedParticle,1);
+            GameManager.gamemanagerInstance.GameOver();
         }
     }
 }

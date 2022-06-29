@@ -13,9 +13,12 @@ public class GameManager : MonoBehaviour
     [Space]
     [Header("Game Controller")]
     public bool gameStart;
+    [SerializeField] private GameObject ball;
     [SerializeField] private float timeValue = 0;
     public float spawnInterval;
     [SerializeField] private ParticleSystem airEffect;
+    [SerializeField] private ParticleSystem diamondAddEffect;
+    public ParticleSystem diedEffect;
     [Space]
     [Header("UI Controller")]    
     [Header("GameStartPanel Controller")]
@@ -41,6 +44,7 @@ public class GameManager : MonoBehaviour
         diamondText.text = moneyType.totalMoney.ToString();
         diamondStartText.text = moneyType.totalMoney.ToString();
         GameStartPanel.SetActive(true);
+        diamondAddEffect.GetComponent<ParticleSystem>().Pause();
     }
     
     void Update()
@@ -49,7 +53,7 @@ public class GameManager : MonoBehaviour
         {
             timeValue += Time.deltaTime;
         }
-        else
+        else if(!gameStart && !GameStartPanel)
         {
             timeValue = 0;
         }
@@ -59,7 +63,7 @@ public class GameManager : MonoBehaviour
     public void StartTheGame()
     {
         gameStart = true;
-        airEffect.GetComponent<ParticleSystem>().Play();
+        airEffect.GetComponent<ParticleSystem>().Play();        
         GameObject.Find("Spawner").gameObject.GetComponent<Spawner>().enabled = true;
         GameStartPanel.SetActive(false);
         GameRunTimePanel.SetActive(true);        
@@ -68,6 +72,8 @@ public class GameManager : MonoBehaviour
     {
         moneyType.totalMoney += 10;
         diamondText.text = moneyType.totalMoney.ToString();
+        diamondAddEffect.GetComponent<ParticleSystem>().Play();
+        diamondAddEffect.GetComponent<Renderer>().material = ball.gameObject.transform.GetChild(0).gameObject.GetComponent<Renderer>().material;
     }
     private void SpawnInterval(float timeToValue)
     {
@@ -118,11 +124,34 @@ public class GameManager : MonoBehaviour
 
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
-    public void RestartGame()
+    public void GameOver()
     {
         gameStart = false;
-        GameObject.Find("Spawner").gameObject.GetComponent<Spawner>().enabled = false;
+        Destroy(GameObject.Find("Spawner").gameObject);
+        BlockAndCirclePause();
         airEffect.GetComponent<ParticleSystem>().Pause();
+        diamondAddEffect.GetComponent<ParticleSystem>().Pause();
+        
+
+        StartCoroutine(nameof(RestartGame));        
+    }
+    private void BlockAndCirclePause()
+    {
+        GameObject[] Circles = GameObject.FindGameObjectsWithTag("Circle");
+        GameObject[] Blocks = GameObject.FindGameObjectsWithTag("Block");
+        foreach (var item in Circles)
+        {
+            item.GetComponent<Circle>().speed = 0;
+        }
+        
+        foreach (var item in Blocks)
+        {
+            item.GetComponent<Block>().speed = 0;
+        }
+    }
+    IEnumerator RestartGame()
+    {
+        yield return new WaitForSeconds(3);
         GameRunTimePanel.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
