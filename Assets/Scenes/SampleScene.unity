@@ -364,11 +364,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d0ed72a63249a49acff2deb6c001d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moneyType: {fileID: 11400000, guid: 110822e0f2f54ab488f97a44cf4e4ead, type: 2}
   gameStart: 0
   timeValue: 0
   timerText: {fileID: 1421281972}
   diamondScore: 0
   diamondText: {fileID: 67147641}
+  spawnInterval: 0
 --- !u!1 &375560471
 GameObject:
   m_ObjectHideFlags: 0
@@ -5700,7 +5702,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6a6944f4904547e4fb039789da5fcd85, type: 2}
+  - {fileID: 2100000, guid: abfd2c0abf6792b4b8521680709d842b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6512,7 +6514,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3462f850b488f124182b28befef22da0, type: 2}
+  - {fileID: 2100000, guid: 4c82cc5b09926c440a443b3a4007494f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

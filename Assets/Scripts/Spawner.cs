@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Spawner : MonoBehaviour
-{
-    [SerializeField] private float spawnInterval = 1;   // Ne sıklıkla nesne çıkarılacak
+{   
+    [SerializeField] private float spawnInterval;   // Ne sıklıkla nesne çıkarılacak
     [SerializeField] private ObjectPool objectPool = null;
     [SerializeField] private int poolValue = 0;
     void Start()
     {
         StartCoroutine(nameof(SpawnRoutine));
+        spawnInterval = GameManager.gamemanagerInstance.spawnInterval;
+    }
+    private void Update()
+    {
+        spawnInterval = GameManager.gamemanagerInstance.spawnInterval; 
     }
     private IEnumerator SpawnRoutine()
     {        

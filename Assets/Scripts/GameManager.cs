@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,13 +6,21 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager gamemanagerInstance;
 
+    [SerializeField] private MoneySO moneyType = null;    // Scriptable Objects eriþir 
+
+    public static GameManager gamemanagerInstance;
+    [Space]
+    [Header("Game Controller")]
     public bool gameStart;
     [SerializeField] private float timeValue = 0;
+    [Space]
+    [Header("UI Controller")]
     [SerializeField] private TextMeshProUGUI timerText;
-    [SerializeField] private int diamondScore = 0;
+    [SerializeField] private int diamondScore;
     [SerializeField] private TextMeshProUGUI diamondText;
+
+    public float spawnInterval;
 
     private void Awake()
     {
@@ -24,8 +32,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         gameStart = false;
-        diamondScore = 0;
-        diamondText.text = diamondScore.ToString();
+        spawnInterval = 2;
+        diamondScore = moneyType.totalMoney;
+        diamondText.text = moneyType.totalMoney.ToString();
     }
     
     void Update()
@@ -39,11 +48,39 @@ public class GameManager : MonoBehaviour
             timeValue = 0;
         }
         DisplayTime(timeValue);
+        SpawnInterval(timeValue);
     }
     public void DiamondAdd()
     {
-        diamondScore+=100;
-        diamondText.text = diamondScore.ToString();
+        moneyType.totalMoney += 10;
+        diamondText.text = moneyType.totalMoney.ToString();
+    }
+    private void SpawnInterval(float timeToValue)
+    {
+        if (timeValue<30)
+        {
+            spawnInterval = 2f;
+        }
+        else if(timeValue>=30 && timeValue<50)
+        {
+            spawnInterval = 1.8f;
+        }
+        else if (timeValue >=50 && timeValue < 80)
+        {
+            spawnInterval = 1.6f;
+        }
+        else if (timeValue >= 80 && timeValue < 100)
+        {
+            spawnInterval = 1.4f;
+        }
+        else if (timeValue >= 100 && timeValue < 120)
+        {
+            spawnInterval = 1.2f;
+        }
+        else if(timeValue>=120)
+        {
+            spawnInterval = 1f;
+        }
     }
     private void DisplayTime(float timeToDisplay)
     {

@@ -33,7 +33,6 @@ public class MobileController : MonoBehaviour
     private void Update()
     {
         SwipeControl(); // Kaydırma kontrolu
-        //MoveInput();    // Player hareket kontrol
     }
     private void FixedUpdate()
     {
