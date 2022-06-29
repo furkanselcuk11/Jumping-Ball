@@ -109,7 +109,7 @@ public class MobileController : MonoBehaviour
         {
             rb.velocity = Vector3.zero;
             rb.AddForce(new Vector3(0, jumpSpeed, 0), ForceMode.Impulse);
-            // Ses ekle
+            AudioController.audioControllerInstance.Play("JumpSound"); // Ses çalışır
             isGround = false;
         }
         if(!tap & isGround)
@@ -126,14 +126,5 @@ public class MobileController : MonoBehaviour
             up = false;
         }
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Diamond"))
-        {
-            Debug.Log("Elmas");
-            GameManager.gamemanagerInstance.DiamondAdd();
-            // Efekt ekle
-            // Ses ekle
-        }
-    }
+    
 }

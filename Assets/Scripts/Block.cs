@@ -19,7 +19,7 @@ public class Block : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("GameOver");
-            // Ses ekle
+            AudioController.audioControllerInstance.Play("GameOverSound"); // Ses çalýþýr
             GameManager.gamemanagerInstance.RestartGame();
         }
     }
