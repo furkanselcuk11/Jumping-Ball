@@ -42,8 +42,9 @@ public class MobileController : MonoBehaviour
     {
         if (Input.touchCount > 0)
         {
-            GameManager.gamemanagerInstance.gameStart = true;
-            GameObject.Find("Spawner").gameObject.GetComponent<Spawner>().enabled = true;
+            //GameManager.gamemanagerInstance.gameStart = true;
+            //GameObject.Find("Spawner").gameObject.GetComponent<Spawner>().enabled = true;
+            GameManager.gamemanagerInstance.StartTheGame();
             _touch = Input.GetTouch(0);
             if (_touch.deltaPosition.magnitude > distance)
             {

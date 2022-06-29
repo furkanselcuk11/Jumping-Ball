@@ -14,13 +14,18 @@ public class GameManager : MonoBehaviour
     [Header("Game Controller")]
     public bool gameStart;
     [SerializeField] private float timeValue = 0;
+    public float spawnInterval;
+    [SerializeField] private ParticleSystem airEffect;
     [Space]
-    [Header("UI Controller")]
+    [Header("UI Controller")]    
+    [Header("GameStartPanel Controller")]
+    [SerializeField] private GameObject GameStartPanel;
     [SerializeField] private TextMeshProUGUI timerText;
-    [SerializeField] private int diamondScore;
+    [SerializeField] private TextMeshProUGUI diamondStartText;
+    [Header("GameRunTimePanel Controller")]
+    [SerializeField] private GameObject GameRunTimePanel;
     [SerializeField] private TextMeshProUGUI diamondText;
 
-    public float spawnInterval;
 
     private void Awake()
     {
@@ -33,8 +38,9 @@ public class GameManager : MonoBehaviour
     {
         gameStart = false;
         spawnInterval = 2;
-        diamondScore = moneyType.totalMoney;
         diamondText.text = moneyType.totalMoney.ToString();
+        diamondStartText.text = moneyType.totalMoney.ToString();
+        GameStartPanel.SetActive(true);
     }
     
     void Update()
@@ -50,6 +56,14 @@ public class GameManager : MonoBehaviour
         DisplayTime(timeValue);
         SpawnInterval(timeValue);
     }
+    public void StartTheGame()
+    {
+        gameStart = true;
+        airEffect.GetComponent<ParticleSystem>().Play();
+        GameObject.Find("Spawner").gameObject.GetComponent<Spawner>().enabled = true;
+        GameStartPanel.SetActive(false);
+        GameRunTimePanel.SetActive(true);        
+    }
     public void DiamondAdd()
     {
         moneyType.totalMoney += 10;
@@ -57,29 +71,36 @@ public class GameManager : MonoBehaviour
     }
     private void SpawnInterval(float timeToValue)
     {
+        var airEffectMain = airEffect.main;
         if (timeValue<30)
         {
             spawnInterval = 2f;
+            airEffectMain.simulationSpeed = 3f;
         }
         else if(timeValue>=30 && timeValue<50)
         {
             spawnInterval = 1.8f;
+            airEffectMain.simulationSpeed = 4f;
         }
         else if (timeValue >=50 && timeValue < 80)
         {
             spawnInterval = 1.6f;
+            airEffectMain.simulationSpeed = 6f;
         }
         else if (timeValue >= 80 && timeValue < 100)
         {
             spawnInterval = 1.4f;
+            airEffectMain.simulationSpeed = 8f;
         }
         else if (timeValue >= 100 && timeValue < 120)
         {
             spawnInterval = 1.2f;
+            airEffectMain.simulationSpeed = 10f;
         }
         else if(timeValue>=120)
         {
             spawnInterval = 1f;
+            airEffectMain.simulationSpeed = 12f;
         }
     }
     private void DisplayTime(float timeToDisplay)
@@ -101,6 +122,8 @@ public class GameManager : MonoBehaviour
     {
         gameStart = false;
         GameObject.Find("Spawner").gameObject.GetComponent<Spawner>().enabled = false;
+        airEffect.GetComponent<ParticleSystem>().Pause();
+        GameRunTimePanel.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
