@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
         {
             timeValue += Time.deltaTime;
         }
-        else if(!gameStart && !GameStartPanel)
+        else if(!gameStart && GameStartPanel)
         {
             timeValue = 0;
         }
