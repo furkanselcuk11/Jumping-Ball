@@ -22,6 +22,7 @@ public class MobileController : MonoBehaviour
     [SerializeField] private float defaultSwipe = 4f;    // Player default kaydýrma mesafesi
     [SerializeField] private bool isGround;    // // Player default kayd�rma mesafesi
     [SerializeField] private ParticleSystem GroundContactEffect; 
+    [SerializeField] private ParticleSystem BallTrailEffect; 
 
 
     void Start()
@@ -33,10 +34,15 @@ public class MobileController : MonoBehaviour
         up = false;
         isGround = true;
         GroundContactEffect.GetComponent<ParticleSystem>().Pause();
+        BallTrailEffect.GetComponent<ParticleSystem>().Pause();
     }
     private void Update()
     {
         SwipeControl(); // Kaydırma kontrolu
+        if (!isGround)
+        {
+            BallTrailEffect.GetComponent<ParticleSystem>().Stop();
+        }
     }
     private void FixedUpdate()
     {
@@ -110,9 +116,11 @@ public class MobileController : MonoBehaviour
         if (up & isGround)
         {
             rb.velocity = Vector3.zero;
+            
             rb.AddForce(new Vector3(0, jumpSpeed, 0), ForceMode.Impulse);
             AudioController.audioControllerInstance.Play("JumpSound"); // Ses çalışır
             isGround = false;
+            
         }
         if(!tap & isGround)
         {
@@ -124,13 +132,12 @@ public class MobileController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("isGround"))
         {
-            //var NewParticle = Instantiate(GroundContactEffect, new Vector3(transform.position.x,0.05f,0f), Quaternion.identity);
-            //NewParticle.GetComponent<Renderer>().material = gameObject.gameObject.transform.GetChild(0).gameObject.GetComponent<Renderer>().material;
             if (GameManager.gamemanagerInstance.gameStart)
             {
                 GroundContactEffect.GetComponent<ParticleSystem>().Play();
                 GroundContactEffect.GetComponent<Renderer>().material = gameObject.gameObject.transform.GetChild(0).gameObject.GetComponent<Renderer>().material;
-            }            
+                BallTrailEffect.GetComponent<ParticleSystem>().Play();
+            }
             isGround = true;
             up = false;
         }
