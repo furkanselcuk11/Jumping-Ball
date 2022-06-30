@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc753e2c915129e448d280151dff9369, type: 3}
   m_Name: DiamondData
   m_EditorClassIdentifier: 
-  _totalMoney: 0
+  _totalMoney: 80
   _minMoney: 0
+  _selectedBall: 5

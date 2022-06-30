@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,12 +14,12 @@ public class GameManager : MonoBehaviour
     [Space]
     [Header("Game Controller")]
     public bool gameStart;
-    [SerializeField] private GameObject ball;
+    [SerializeField] private GameObject balls;
     [SerializeField] private float timeValue = 0;
     public float spawnInterval;
     [SerializeField] private ParticleSystem airEffect;
     [SerializeField] private ParticleSystem diamondAddEffect;
-    public ParticleSystem diedEffect;
+    public ParticleSystem diedEffect;         
     [Space]
     [Header("UI Controller")]    
     [Header("GameStartPanel Controller")]
@@ -73,7 +74,7 @@ public class GameManager : MonoBehaviour
         moneyType.totalMoney += 10;
         diamondText.text = moneyType.totalMoney.ToString();
         diamondAddEffect.GetComponent<ParticleSystem>().Play();
-        diamondAddEffect.GetComponent<Renderer>().material = ball.gameObject.transform.GetChild(0).gameObject.GetComponent<Renderer>().material;
+        diamondAddEffect.GetComponent<Renderer>().material = balls.gameObject.transform.GetChild(0).gameObject.GetComponent<Renderer>().material;
     }
     private void SpawnInterval(float timeToValue)
     {
