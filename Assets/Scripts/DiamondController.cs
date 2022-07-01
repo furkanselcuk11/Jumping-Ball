@@ -17,10 +17,16 @@ public class DiamondController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Elmas");
-            GameManager.gamemanagerInstance.DiamondAdd();
-            // Efekt ekle
+            GameManager.gamemanagerInstance.DiamondAdd();            
             AudioController.audioControllerInstance.Play("DiamondSound"); // Ses çalýþýr
+            this.StartCoroutine(nameof(IsActive));
         }
+    }
+
+    IEnumerator IsActive()
+    {
+        this.gameObject.GetComponent<MeshRenderer>().enabled = false;
+        yield return new WaitForSeconds(1);
+        this.gameObject.GetComponent<MeshRenderer>().enabled = true;
     }
 }

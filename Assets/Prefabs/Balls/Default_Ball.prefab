@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1039947471012888467}
   - component: {fileID: 1039947471012888464}
   - component: {fileID: 1039947471012888465}
+  - component: {fileID: -8399004687211548482}
   m_Layer: 0
   m_Name: Default_Ball
   m_TagString: Player
@@ -97,3 +98,16 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-8399004687211548482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1039947471012888479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad6ca2e29307f0849bc7305135561e18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _turnSpeed: 1000

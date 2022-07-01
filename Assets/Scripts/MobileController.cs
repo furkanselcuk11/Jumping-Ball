@@ -44,10 +44,6 @@ public class MobileController : MonoBehaviour
     private void Update()
     {        
         SwipeControl(); // Kaydırma kontrolu
-        if (!isGround)
-        {
-            BallTrailEffect.GetComponent<ParticleSystem>().Stop();
-        }
     }
     private void FixedUpdate()
     {
@@ -123,6 +119,7 @@ public class MobileController : MonoBehaviour
             rb.velocity = Vector3.zero;
             
             rb.AddForce(new Vector3(0, jumpSpeed, 0), ForceMode.Impulse);
+            BallTrailEffect.GetComponent<ParticleSystem>().Stop();
             AudioController.audioControllerInstance.Play("JumpSound"); // Ses çalışır
             isGround = false;
             
