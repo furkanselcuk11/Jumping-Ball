@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 
 public class MobileController : MonoBehaviour
 {
+    [SerializeField] private BallSO ballType = null;    // Scriptable Objects eriþir 
+
     Rigidbody rb;
     [Space]
     [Header ("Tap Controller")]
@@ -54,15 +56,8 @@ public class MobileController : MonoBehaviour
     
     void SwipeControl()
     {        
-        if (Input.touchCount > 0)
+        if (Input.touchCount > 0 && GameManager.gamemanagerInstance.gameStart)
         {
-            if(_touch.phase == TouchPhase.Began && !GameManager.gamemanagerInstance.gameStart)
-            {
-                if (EventSystem.current.IsPointerOverGameObject())
-                    return;
-                GameManager.gamemanagerInstance.StartTheGame();
-            }           
-            
             _touch = Input.GetTouch(0);
             if (_touch.deltaPosition.magnitude > distance)
             {
@@ -145,7 +140,7 @@ public class MobileController : MonoBehaviour
             if (GameManager.gamemanagerInstance.gameStart)
             {
                 GroundContactEffect.GetComponent<ParticleSystem>().Play();
-                GroundContactEffect.GetComponent<Renderer>().material = Balls.gameObject.transform.GetChild(0).gameObject.GetComponent<Renderer>().material;
+                GroundContactEffect.GetComponent<Renderer>().material = Balls.gameObject.transform.GetChild(ballType.selectedBall).gameObject.GetComponent<Renderer>().material;
                 BallTrailEffect.GetComponent<ParticleSystem>().Play();
             }
             isGround = true;

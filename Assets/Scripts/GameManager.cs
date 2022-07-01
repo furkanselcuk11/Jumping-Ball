@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 {
 
     [SerializeField] private MoneySO moneyType = null;    // Scriptable Objects eriþir 
+    [SerializeField] private BallSO ballType = null;    // Scriptable Objects eriþir 
 
     public static GameManager gamemanagerInstance;
     [Space]
@@ -74,7 +75,7 @@ public class GameManager : MonoBehaviour
         moneyType.totalMoney += 10;
         diamondText.text = moneyType.totalMoney.ToString();
         diamondAddEffect.GetComponent<ParticleSystem>().Play();
-        diamondAddEffect.GetComponent<Renderer>().material = balls.gameObject.transform.GetChild(0).gameObject.GetComponent<Renderer>().material;
+        diamondAddEffect.GetComponent<Renderer>().material = balls.gameObject.transform.GetChild(ballType.selectedBall).gameObject.GetComponent<Renderer>().material;
     }
     private void SpawnInterval(float timeToValue)
     {
@@ -109,6 +110,10 @@ public class GameManager : MonoBehaviour
             spawnInterval = 1f;
             airEffectMain.simulationSpeed = 12f;
         }
+    }
+    public void UpdateUIText()
+    {
+        diamondStartText.text = moneyType.totalMoney.ToString();
     }
     private void DisplayTime(float timeToDisplay)
     {

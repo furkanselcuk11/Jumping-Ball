@@ -23,7 +23,8 @@ public class Block : MonoBehaviour
             var diedParticle = Instantiate(GameManager.gamemanagerInstance.diedEffect, other.gameObject.transform.position, Quaternion.identity);
             diedParticle.GetComponent<Renderer>().material = other.gameObject.transform.GetComponent<Renderer>().material;
             Destroy(other.gameObject);
-            Destroy(diedParticle,1);
+            Destroy(other.transform.parent.gameObject.transform.parent.GetChild(3).gameObject);
+            Destroy(diedParticle,1);            
             GameManager.gamemanagerInstance.GameOver();
         }
     }
