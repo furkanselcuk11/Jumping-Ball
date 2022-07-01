@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01690318a376f10409594262952b7d7d, type: 3}
   m_Name: BallsData
   m_EditorClassIdentifier: 
-  _selectedBall: 4
+  _selectedBall: 0
   _balls:
   - index: 0
     price: 0
