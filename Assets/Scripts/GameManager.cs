@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public bool gameStart;
     [SerializeField] private GameObject balls;
     [SerializeField] private float timeValue = 0;
+    [SerializeField] private int meter = 0;
     public float spawnInterval;
     [SerializeField] private ParticleSystem airEffect;
     [SerializeField] private ParticleSystem diamondAddEffect;
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
     [Header("GameRunTimePanel Controller")]
     [SerializeField] private GameObject GameRunTimePanel;
     [SerializeField] private TextMeshProUGUI diamondText;
+    [SerializeField] private TextMeshProUGUI meterText;
 
 
     private void Awake()
@@ -54,6 +56,7 @@ public class GameManager : MonoBehaviour
         if (gameStart)
         {
             timeValue += Time.deltaTime;
+            
         }
         else if(!gameStart && GameStartPanel)
         {
@@ -65,6 +68,7 @@ public class GameManager : MonoBehaviour
     public void StartTheGame()
     {
         gameStart = true;
+        StartCoroutine(nameof(MeterCounter));
         airEffect.GetComponent<ParticleSystem>().Play();        
         GameObject.Find("Spawner").gameObject.GetComponent<Spawner>().enabled = true;
         GameStartPanel.SetActive(false);
@@ -128,11 +132,12 @@ public class GameManager : MonoBehaviour
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
 
-        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);        
     }
     public void GameOver()
     {
         gameStart = false;
+        StopCoroutine(nameof(MeterCounter));
         Destroy(GameObject.Find("Spawner").gameObject);
         BlockAndCirclePause();
         airEffect.GetComponent<ParticleSystem>().Pause();
@@ -140,6 +145,10 @@ public class GameManager : MonoBehaviour
         
 
         StartCoroutine(nameof(RestartGame));        
+    }
+    public void GameExit()
+    {
+        Application.Quit();
     }
     private void BlockAndCirclePause()
     {
@@ -160,5 +169,16 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(3);
         GameRunTimePanel.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    IEnumerator MeterCounter()
+    {
+        while (true)
+        {
+            
+            yield return new WaitForSeconds(1);
+            meter += 10;
+            meterText.text = meter.ToString() + " m";
+        }
+              
     }
 }
