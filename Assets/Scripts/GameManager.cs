@@ -49,6 +49,10 @@ public class GameManager : MonoBehaviour
         diamondStartText.text = moneyType.totalMoney.ToString();
         GameStartPanel.SetActive(true);
         diamondAddEffect.GetComponent<ParticleSystem>().Pause();
+        if (moneyType.gameOpen < 3)
+        {
+            moneyType.gameOpen++;
+        }
     }
     
     void Update()

@@ -7,7 +7,7 @@ public class MoneySO : ScriptableObject
 {
     [SerializeField] private int _totalMoney=0;
     [SerializeField] private int _minMoney=0;
-
+    [SerializeField] private int _gameOpen=0;
     public int totalMoney
     {
         get { return _totalMoney; }
@@ -17,5 +17,10 @@ public class MoneySO : ScriptableObject
     {
         get { return _minMoney; }
         set { _minMoney = value; }
+    }
+    public int gameOpen
+    {
+        get { return _gameOpen; }
+        set { _gameOpen = value; }
     }
 }

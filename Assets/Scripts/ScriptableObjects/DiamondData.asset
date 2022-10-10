@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _totalMoney: 0
   _minMoney: 0
+  _gameOpen: 0
