@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject balls;
     [SerializeField] private float timeValue = 0;
     [SerializeField] private int meter = 0;
-    public float spawnInterval;
+    public float spawnInterval; // Obsactle Doğma süresi
     [SerializeField] private ParticleSystem airEffect;
     [SerializeField] private ParticleSystem diamondAddEffect;
     public ParticleSystem diedEffect;         
@@ -30,9 +30,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI diamondStartText;
     [Header("GameRunTimePanel Controller")]
     [SerializeField] private GameObject GameRunTimePanel;
+    [SerializeField] private GameObject restartButton;
     [SerializeField] private TextMeshProUGUI diamondText;
     [SerializeField] private TextMeshProUGUI meterText;
-
 
     private void Awake()
     {
@@ -68,10 +68,12 @@ public class GameManager : MonoBehaviour
     public void StartTheGame()
     {
         gameStart = true;
+        AudioController.audioControllerInstance.Play("BGSound"); // Ses çalışır
         StartCoroutine(nameof(MeterCounter));
         airEffect.GetComponent<ParticleSystem>().Play();        
         GameObject.Find("Spawner").gameObject.GetComponent<Spawner>().enabled = true;
         GameStartPanel.SetActive(false);
+        restartButton.SetActive(false);
         GameRunTimePanel.SetActive(true);        
     }
     public void DiamondAdd()
@@ -93,26 +95,31 @@ public class GameManager : MonoBehaviour
         {
             spawnInterval = 1.8f;
             airEffectMain.simulationSpeed = 4f;
+            SkyBoxContoller.skyBoxContollerInstance.SkyBoxChange(1);
         }
         else if (timeValue >=50 && timeValue < 80)
         {
             spawnInterval = 1.6f;
             airEffectMain.simulationSpeed = 6f;
+            SkyBoxContoller.skyBoxContollerInstance.SkyBoxChange(2);
         }
         else if (timeValue >= 80 && timeValue < 100)
         {
             spawnInterval = 1.4f;
             airEffectMain.simulationSpeed = 8f;
+            SkyBoxContoller.skyBoxContollerInstance.SkyBoxChange(3);
         }
         else if (timeValue >= 100 && timeValue < 120)
         {
             spawnInterval = 1.2f;
             airEffectMain.simulationSpeed = 10f;
+            SkyBoxContoller.skyBoxContollerInstance.SkyBoxChange(4);
         }
         else if(timeValue>=120)
         {
             spawnInterval = 1f;
             airEffectMain.simulationSpeed = 12f;
+            SkyBoxContoller.skyBoxContollerInstance.SkyBoxChange(5);
         }
     }
     public void UpdateUIText()
@@ -142,9 +149,7 @@ public class GameManager : MonoBehaviour
         BlockAndCirclePause();
         airEffect.GetComponent<ParticleSystem>().Pause();
         diamondAddEffect.GetComponent<ParticleSystem>().Pause();
-        
-
-        StartCoroutine(nameof(RestartGame));        
+        restartButton.SetActive(true);      
     }
     public void GameExit()
     {
@@ -164,9 +169,8 @@ public class GameManager : MonoBehaviour
             item.GetComponent<Block>().speed = 0;
         }
     }
-    IEnumerator RestartGame()
+    public void RestartGame()
     {
-        yield return new WaitForSeconds(3);
         GameRunTimePanel.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

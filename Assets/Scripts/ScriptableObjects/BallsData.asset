@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01690318a376f10409594262952b7d7d, type: 3}
   m_Name: BallsData
   m_EditorClassIdentifier: 
-  _selectedBall: 0
+  _selectedBall: 1
   _balls:
   - index: 0
     price: 0
@@ -21,17 +21,17 @@ MonoBehaviour:
     price: 100
     isUnlocked: 0
   - index: 2
-    price: 500
+    price: 1000
     isUnlocked: 0
   - index: 3
-    price: 2000
-    isUnlocked: 0
-  - index: 4
     price: 5000
     isUnlocked: 0
-  - index: 5
+  - index: 4
     price: 10000
     isUnlocked: 0
+  - index: 5
+    price: 50000
+    isUnlocked: 0
   - index: 6
-    price: 20000
+    price: 100000
     isUnlocked: 0
